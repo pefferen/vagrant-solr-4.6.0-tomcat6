@@ -14,8 +14,12 @@ sudo apt-get install tomcat6 -y
 mkdir -p /tmp/solr/
 cd /tmp/solr/
 
-wget http://apache.mirror.1000mbps.com/lucene/solr/4.6.0/solr-4.6.0-src.tgz
-tar xvf solr-4.6.0.tgz
+# If Solr archive is not available locally download it
+if [ ! -f "solr-4.6.0.tgz" ]; then
+  # Download Solr
+  wget http://apache.mirror.1000mbps.com/lucene/solr/4.6.0/solr-4.6.0.tgz
+  tar xvf solr-4.6.0.tgz
+fi
 
 # check for solr base directory, if not create it
 if [ ! -d "/var/solr" ]; then
@@ -23,9 +27,14 @@ if [ ! -d "/var/solr" ]; then
   mkdir /var/solr
 fi
 
-# Copy the Solr webapp and the example multicore configuration files:
-# sudo cp solr-4.6.0/dist/apache-solr-3.6.1.war /var/solr/solr.war
-# sudo cp -R apache-solr-3.6.1/example/multicore/* /var/solr/
+# Install Solr if it is not yet installed.
+if [ ! -f "/var/solr/solr.war" ]; then
+  # Copy the Solr webapp and the example multicore configuration files:
+  sudo cp /tmp/solr/solr-4.6.0/dist/solr-4.6.0.war /var/solr/solr.war
+  sudo cp -R /tmp/solr/solr-4.6.0/example/multicore/* /var/solr/
+fi
 
 # set filepermissions to Tomcat user
 sudo chown -R tomcat6 /var/solr/
+
+echo "Ubuntu, Tomcat and Solr have been installed."
