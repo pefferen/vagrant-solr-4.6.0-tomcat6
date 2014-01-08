@@ -1,0 +1,2 @@
+# we do not need the instance specific Vagrant directory
+.vagrant/
