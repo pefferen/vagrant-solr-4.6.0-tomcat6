@@ -117,5 +117,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   chef.validation_client_name = "ORGNAME-validator"
 
   # Provisioning using shell script
-   config.vm.provision "shell", path: "solr3.6.1.ubuntu.sh"
+   config.vm.provision "shell", path: "solr4.6.0.ubuntu.sh"
 end
