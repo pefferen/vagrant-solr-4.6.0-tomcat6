@@ -31,7 +31,7 @@ if [ ! -f "/usr/share/tomcat6/webapps/solr.war" ]; then
   # Copy the Solr webapp and the example multicore configuration files:
   sudo mkdir -p /usr/share/tomcat6/webapps
   sudo cp /tmp/solr-4.10.2/dist/solr-4.10.2.war /usr/share/tomcat6/webapps/solr.war
-  sudo cp -R /tmp/solr/solr-4.10.2/example/multicore/* /usr/share/solr/
+  sudo cp -R /tmp/solr-4.10.2/example/multicore/* /usr/share/solr/
 fi
 
 # Add configuration to settings file.
