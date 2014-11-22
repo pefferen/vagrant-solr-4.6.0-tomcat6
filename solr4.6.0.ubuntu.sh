@@ -29,8 +29,8 @@ fi
 # Install Solr if it is not yet installed.
 if [ ! -f "/usr/share/tomcat6/webapps/solr.war" ]; then
   # Copy the Solr webapp and the example multicore configuration files:
-  sudo mkdir /usr/share/tomcat6/webapps
-  sudo cp /tmp /solr-4.10.2/dist/solr-4.10.2.war /usr/share/tomcat6/webapps/solr.war
+  sudo mkdir -p /usr/share/tomcat6/webapps
+  sudo cp /tmp/solr-4.10.2/dist/solr-4.10.2.war /usr/share/tomcat6/webapps/solr.war
   sudo cp -R /tmp/solr/solr-4.10.2/example/multicore/* /usr/share/solr/
 fi
 
@@ -55,7 +55,7 @@ sudo chmod -R o+x /usr/share/tomcat6/lib
 
 # Configure log4j logging
 echo "Configure log4j loggin"
-sudo cp /usr/share/solr4/resources/log4j.properties /usr/share/tomcat6/lib
+sudo cp /tmp/solr-4.10.2/example/resources/log4j.properties /usr/share/tomcat6/lib
 sudo chown tomcat6:tomcat6 /usr/share/tomcat6/lib/log4j.properties
 
 # Setup Tomcat user.
