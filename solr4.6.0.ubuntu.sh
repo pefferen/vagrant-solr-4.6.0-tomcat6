@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Assumption we are using Ubuntu precise 64 bits (12.04)
+# TODO use variables for solr version.
 
 # First we update apt
 sudo apt-get update
@@ -13,24 +14,24 @@ sudo apt-get install tomcat6 tomcat6-admin tomcat6-common tomcat6-user -y
 cd /tmp
 
 # If Solr archive is not available locally download it
-if [ ! -f "solr-4.6.0.tgz" ]; then
+if [ ! -f "solr-4.10.2.tgz" ]; then
   # Download Solr
-  wget http://apache.mirror.1000mbps.com/lucene/solr/4.6.0/solr-4.6.0.tgz
-  tar xvf solr-4.6.0.tgz
+  wget http://apache.proserve.nl/lucene/solr/4.10.2/solr-4.10.2.tgz  
+  tar xvf solr-4.10.2.tgz
 fi
 
 # check for solr base directory, if not create it
-if [ ! -d "/var/solr" ]; then
+if [ ! -d "/usr/share/solr" ]; then
   # create the Solr base directory
-  mkdir /var/solr
+  mkdir -p /usr/share/solr
 fi
 
 # Install Solr if it is not yet installed.
 if [ ! -f "/usr/share/tomcat6/webapps/solr.war" ]; then
   # Copy the Solr webapp and the example multicore configuration files:
   sudo mkdir /usr/share/tomcat6/webapps
-  sudo cp /tmp /solr-4.6.0/dist/solr-4.6.0.war /usr/share/tomcat6/webapps/solr.war
-  sudo cp -R /tmp/solr/solr-4.6.0/example/multicore/* /usr/share/solr/
+  sudo cp /tmp /solr-4.10.2/dist/solr-4.10.2.war /usr/share/tomcat6/webapps/solr.war
+  sudo cp -R /tmp/solr/solr-4.10.2/example/multicore/* /usr/share/solr/
 fi
 
 # Add configuration to settings file.
@@ -66,4 +67,4 @@ sudo echo "<tomcat-users>
 </tomcat-users>" > /etc/tomcat6/tomcat-users.xml
 
 
-echo "Ubuntu, Tomcat and Solr have been installed."
+echo "Ubuntu, Tomcat and Solr have: been installed."
