@@ -4,8 +4,8 @@
 # TODO use variables for solr version.
 
 # First we update apt
-sudo apt-get update
-sudo apt-get upgrade
+#sudo apt-get update
+#sudo apt-get upgrade
 
 # Install tomcat
 sudo apt-get install tomcat6 tomcat6-admin tomcat6-common tomcat6-user -y
@@ -31,6 +31,13 @@ if [ ! -f "/usr/share/tomcat6/webapps/solr.war" ]; then
   # Copy the Solr webapp and the example multicore configuration files:
   sudo mkdir -p /usr/share/tomcat6/webapps
   sudo cp /tmp/solr-4.10.2/dist/solr-4.10.2.war /usr/share/tomcat6/webapps/solr.war
+
+  # Copy other solr files to solr base directory.
+  #sudo cp -R /tmp/solr-4.10.2/* /usr/share/solr/
+
+  # Copy Log4J libraries.
+  sudo cp /tmp/solr-4.10.2/example/lib/ext/* /usr/share/tomcat6/lib/
+
   sudo cp -R /tmp/solr-4.10.2/example/multicore/* /usr/share/solr/
 fi
 
